@@ -1,0 +1,19 @@
+{
+  "name": "datviet",
+  "version": "0.0.1",
+  "authors": [
+    "Poorva Mahajan <poorva.mahajan2990@gmail.com>"
+  ],
+  "description": "datviet javascript included files",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.4"
+  }
+}
