@@ -25,33 +25,17 @@
 #
 # @ignore
 # ===================================================================================================
-require 'rubygems'
-require 'yaml'
-require 'logger'
+require 'test_helper'
 
-require 'kaltura'
-
-class Test::Unit::TestCase
-
-  # read the kaltura config file
-  # initiate a kaltura configuration object
-  # initiate kaltura client object
-  # get the sesion object and assigns it to the client
-  def setup
-    config_file = YAML.load_file("kaltura.yml")
-        
-    partner_id = config_file["test"]["partner_id"]
-    service_url = config_file["test"]["service_url"]
-    administrator_secret = config_file["test"]["administrator_secret"]
-    timeout = config_file["test"]["timeout"]
+class DocumentServiceTest < Test::Unit::TestCase
+  
+    # this test tries to access the depricated document service and retrieves the list of documents.
+    should "get the document list" do
+  
+    document_entry_filter = Kaltura::KalturaDocumentEntryFilter.new
+    filter_pager = Kaltura::KalturaFilterPager.new      
     
-    config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
-    config.timeout = timeout
-    
-    @client = Kaltura::KalturaClient.new( config )
-    session = @client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
-    @client.ks = session
+    document_list = @client.document_service.list(document_entry_filter, filter_pager) 
+    assert_not_nil document_list.total_count   
   end
-
 end

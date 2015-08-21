@@ -12,9 +12,49 @@
     <script type="text/javascript" src="/dashboard/dashboard_list.js"></script>
   </head>
   <body>
-    <div id='dashboard-list' ng-controller="dashboardListCtrl" class="container-fluid">
+
+    <div class='aligncenter headingfont margin25'>
+      <label> List of Assets uploaded on Kaltura Server<label>
+    </div>
+    <div class='aligncenter margin25'> 
+      <table>
+        <thead>
+          <tr>
+            <td>Thumbnail</td>
+            <td>Media Type</td>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Updated At</td>
+            <td>User Id</td>
+            <td>Download</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @list.objects.each do |list| %>
+            <tr>
+              <td><img class='thumbnail' src="<%= list.thumbnail_url %>" /></td>
+              <td><%= (list.media_type.eql? @media_type_video) ? 'Video' : 'other' %></td>
+              <td><%= list.id %></td>
+              <td><%= list.name %></td>
+              <td><%= list.description %></td>
+              <td><%= Time.at(list.updated_at).to_datetime%></td>
+              <td><%= list.user_id %></td>
+              <td><a href="<%= list.download_url %>" target="_blank">Download</a></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class='aligncenter headingfont margin25'>
+      <label> List of Videos uploaded on Kaltura Server<label>
+    </div>
+
+    <div id='dashboard-list' ng-controller="dashboardListCtrl" class="container-fluid aligncenter margin25">
 
 
+      <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_jjlr29cg&playerId=kaltura_player_1440132371&cache_st=1440132371&width=400&height=333&flashvars[streamerType]=auto"></script>
 
       <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_9fyuc4qh&playerId=kaltura_player_1439986332&cache_st=1439986332&width=400&height=333&flashvars[streamerType]=auto"></script>
 

@@ -25,33 +25,7 @@
 #
 # @ignore
 # ===================================================================================================
-require 'rubygems'
-require 'yaml'
-require 'logger'
-
-require 'kaltura'
-
-class Test::Unit::TestCase
-
-  # read the kaltura config file
-  # initiate a kaltura configuration object
-  # initiate kaltura client object
-  # get the sesion object and assigns it to the client
-  def setup
-    config_file = YAML.load_file("kaltura.yml")
-        
-    partner_id = config_file["test"]["partner_id"]
-    service_url = config_file["test"]["service_url"]
-    administrator_secret = config_file["test"]["administrator_secret"]
-    timeout = config_file["test"]["timeout"]
-    
-    config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
-    config.timeout = timeout
-    
-    @client = Kaltura::KalturaClient.new( config )
-    session = @client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
-    @client.ks = session
-  end
-
+module Kaltura
+  require 'kaltura_client.rb'
+  Dir[File.dirname(__FILE__) + '/kaltura_plugins/*.rb'].each {|file| require file }
 end

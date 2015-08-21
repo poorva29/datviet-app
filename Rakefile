@@ -1,6 +1,19 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
+require 'rubygems'
+require 'rake'
+require 'yaml'
 
-require File.expand_path('../config/application', __FILE__)
+require 'rake/testtask'
 
-DatvietApp::Application.load_tasks
+puts "\e[1;33;40mThese tests perform modifications to account settings and delete profiles associated with the account -
+DO NOT RUN THEM ON A PRODUCTION ACCOUNT!\e[0m"
+print "Do you want to continue (y/n) ?"
+input = $stdin.gets.chomp!
+if (input[0] == 'y')
+  Rake::TestTask.new(:test) do |test|
+    test.libs << '.' << 'test'
+    test.pattern = 'test/**/*_test.rb'
+    test.verbose = false
+  end
+else
+  exit
+end

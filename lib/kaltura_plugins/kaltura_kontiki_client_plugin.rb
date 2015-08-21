@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -25,33 +25,48 @@
 #
 # @ignore
 # ===================================================================================================
-require 'rubygems'
-require 'yaml'
-require 'logger'
+require 'kaltura_client.rb'
 
-require 'kaltura'
+module Kaltura
 
-class Test::Unit::TestCase
+	class KalturaKontikiStorageProfileOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
 
-  # read the kaltura config file
-  # initiate a kaltura configuration object
-  # initiate kaltura client object
-  # get the sesion object and assigns it to the client
-  def setup
-    config_file = YAML.load_file("kaltura.yml")
-        
-    partner_id = config_file["test"]["partner_id"]
-    service_url = config_file["test"]["service_url"]
-    administrator_secret = config_file["test"]["administrator_secret"]
-    timeout = config_file["test"]["timeout"]
-    
-    config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
-    config.timeout = timeout
-    
-    @client = Kaltura::KalturaClient.new( config )
-    session = @client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
-    @client.ks = session
-  end
+	class KalturaKontikiStorageProfile < KalturaStorageProfile
+		attr_accessor :service_token
+
+	end
+
+	class KalturaKontikiStorageDeleteJobData < KalturaStorageDeleteJobData
+		# Unique Kontiki MOID for the content uploaded to Kontiki
+		#      
+		attr_accessor :content_moid
+		attr_accessor :service_token
+
+	end
+
+	class KalturaKontikiStorageExportJobData < KalturaStorageExportJobData
+		# Holds the id of the exported asset
+		# 	 
+		attr_accessor :flavor_asset_id
+		# Unique Kontiki MOID for the content uploaded to Kontiki
+		# 	 
+		attr_accessor :content_moid
+		attr_accessor :service_token
+
+	end
+
+	class KalturaKontikiStorageProfileBaseFilter < KalturaStorageProfileFilter
+
+	end
+
+	class KalturaKontikiStorageProfileFilter < KalturaKontikiStorageProfileBaseFilter
+
+	end
+
 
 end

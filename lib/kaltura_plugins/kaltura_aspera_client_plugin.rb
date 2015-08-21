@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -25,33 +25,37 @@
 #
 # @ignore
 # ===================================================================================================
-require 'rubygems'
-require 'yaml'
-require 'logger'
+require 'kaltura_client.rb'
 
-require 'kaltura'
+module Kaltura
 
-class Test::Unit::TestCase
 
-  # read the kaltura config file
-  # initiate a kaltura configuration object
-  # initiate kaltura client object
-  # get the sesion object and assigns it to the client
-  def setup
-    config_file = YAML.load_file("kaltura.yml")
-        
-    partner_id = config_file["test"]["partner_id"]
-    service_url = config_file["test"]["service_url"]
-    administrator_secret = config_file["test"]["administrator_secret"]
-    timeout = config_file["test"]["timeout"]
-    
-    config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
-    config.timeout = timeout
-    
-    @client = Kaltura::KalturaClient.new( config )
-    session = @client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
-    @client.ks = session
-  end
+	# Aspera service
+	#  
+	class KalturaAsperaService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		def get_fasp_url(flavor_asset_id)
+			kparams = {}
+			client.add_param(kparams, 'flavorAssetId', flavor_asset_id);
+			client.queue_service_action_call('aspera_aspera', 'getFaspUrl', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :aspera_service
+		def aspera_service
+			if (@aspera_service == nil)
+				@aspera_service = KalturaAsperaService.new(self)
+			end
+			return @aspera_service
+		end
+	end
 
 end

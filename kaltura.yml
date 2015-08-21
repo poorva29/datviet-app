@@ -1,0 +1,7 @@
+test:
+    user_name: PoorvaMahajan
+    partner_id: 1988382
+    administrator_secret: 2e87ab6b717d9f22181f2d6f5dd92983
+    secret: cc2570809229159dc46cc2a4adc5cdb1
+    service_url: 'http://www.kaltura.com/'
+    timeout: 120

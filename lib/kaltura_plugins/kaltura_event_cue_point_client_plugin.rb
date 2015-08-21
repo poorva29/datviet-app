@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -25,33 +25,43 @@
 #
 # @ignore
 # ===================================================================================================
-require 'rubygems'
-require 'yaml'
-require 'logger'
+require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_cue_point_client_plugin.rb'
 
-require 'kaltura'
+module Kaltura
 
-class Test::Unit::TestCase
+	class KalturaEventCuePointOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		PARTNER_SORT_VALUE_ASC = "+partnerSortValue"
+		START_TIME_ASC = "+startTime"
+		TRIGGERED_AT_ASC = "+triggeredAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		PARTNER_SORT_VALUE_DESC = "-partnerSortValue"
+		START_TIME_DESC = "-startTime"
+		TRIGGERED_AT_DESC = "-triggeredAt"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
 
-  # read the kaltura config file
-  # initiate a kaltura configuration object
-  # initiate kaltura client object
-  # get the sesion object and assigns it to the client
-  def setup
-    config_file = YAML.load_file("kaltura.yml")
-        
-    partner_id = config_file["test"]["partner_id"]
-    service_url = config_file["test"]["service_url"]
-    administrator_secret = config_file["test"]["administrator_secret"]
-    timeout = config_file["test"]["timeout"]
-    
-    config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
-    config.timeout = timeout
-    
-    @client = Kaltura::KalturaClient.new( config )
-    session = @client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
-    @client.ks = session
-  end
+	class KalturaEventType
+		BROADCAST_START = "1"
+		BROADCAST_END = "2"
+	end
+
+	class KalturaEventCuePoint < KalturaCuePoint
+		attr_accessor :event_type
+
+	end
+
+	class KalturaEventCuePointBaseFilter < KalturaCuePointFilter
+		attr_accessor :event_type_equal
+		attr_accessor :event_type_in
+
+	end
+
+	class KalturaEventCuePointFilter < KalturaEventCuePointBaseFilter
+
+	end
+
 
 end

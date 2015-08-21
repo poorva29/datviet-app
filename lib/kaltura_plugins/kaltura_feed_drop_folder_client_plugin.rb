@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -25,33 +25,42 @@
 #
 # @ignore
 # ===================================================================================================
-require 'rubygems'
-require 'yaml'
-require 'logger'
+require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_drop_folder_client_plugin.rb'
 
-require 'kaltura'
+module Kaltura
 
-class Test::Unit::TestCase
+	class KalturaFeedItemInfo < KalturaObjectBase
+		attr_accessor :item_xpath
+		attr_accessor :item_publish_date_xpath
+		attr_accessor :item_unique_identifier_xpath
+		attr_accessor :item_content_file_size_xpath
+		attr_accessor :item_content_url_xpath
+		attr_accessor :item_content_bitrate_xpath
+		attr_accessor :item_hash_xpath
+		attr_accessor :item_content_xpath
+		attr_accessor :content_bitrate_attribute_name
 
-  # read the kaltura config file
-  # initiate a kaltura configuration object
-  # initiate kaltura client object
-  # get the sesion object and assigns it to the client
-  def setup
-    config_file = YAML.load_file("kaltura.yml")
-        
-    partner_id = config_file["test"]["partner_id"]
-    service_url = config_file["test"]["service_url"]
-    administrator_secret = config_file["test"]["administrator_secret"]
-    timeout = config_file["test"]["timeout"]
-    
-    config = Kaltura::KalturaConfiguration.new(partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
-    config.timeout = timeout
-    
-    @client = Kaltura::KalturaClient.new( config )
-    session = @client.session_service.start( administrator_secret, '', Kaltura::KalturaSessionType::ADMIN )
-    @client.ks = session
-  end
+	end
+
+	class KalturaFeedDropFolder < KalturaDropFolder
+		attr_accessor :item_handling_limit
+		attr_accessor :feed_item_info
+
+		def item_handling_limit=(val)
+			@item_handling_limit = val.to_i
+		end
+	end
+
+	class KalturaFeedDropFolderFile < KalturaDropFolderFile
+		# MD5 or Sha1 encrypted string
+		# 	 
+		attr_accessor :hash
+		# Path of the original Feed content XML
+		# 	 
+		attr_accessor :feed_xml_path
+
+	end
+
 
 end
