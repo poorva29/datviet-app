@@ -24,21 +24,21 @@
   </head>
   <body>
 
-    <div class='aligncenter headingfont margin25'>
+    <div class='container-fluid aligncenter headingfont text-info margin25'>
       <label> List of Assets uploaded on Kaltura Server<label>
     </div>
-    <div class='aligncenter margin25'> 
-      <table>
+    <div class='container-fluid table-responsive aligncenter margin25'>
+      <table class='table table-bordered table-hover'>
         <thead>
           <tr>
-            <td>Thumbnail</td>
-            <td>Media Type</td>
-            <td>Id</td>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Updated At</td>
-            <td>User Id</td>
-            <td>Download</td>
+            <th>Thumbnail</th>
+            <th>Media Type</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Updated At</th>
+            <th>User Id</th>
+            <th>Download</th>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +59,7 @@
     </div>
 
 
-    <div id='dashboard-list' ng-controller="dashboardListCtrl" class="container-fluid">
+    <div id='dashboard-list' ng-controller="dashboardListCtrl" class="container-fluid hide">
       <div class="row-fluid dashborad-list">
         <div>
             <script type="text/ng-template" id="myModalContent.html">
@@ -80,23 +80,6 @@
           </tr>
         </table>
       </div>
-    </div>
-
-    <div class='aligncenter headingfont margin25'>
-      <label> List of Videos uploaded on Kaltura Server<label>
-    </div>
-
-    <div id='dashboard-list' ng-controller="dashboardListCtrl" class="container-fluid aligncenter margin25">
-
-
-      <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_jjlr29cg&playerId=kaltura_player_1440132371&cache_st=1440132371&width=400&height=333&flashvars[streamerType]=auto"></script>
-
-      <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_9fyuc4qh&playerId=kaltura_player_1439986332&cache_st=1439986332&width=400&height=333&flashvars[streamerType]=auto"></script>
-
-
-      <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_6nc0394y&playerId=kaltura_player_1439986936&cache_st=1439986936&width=400&height=333&flashvars[streamerType]=auto"></script>
-
-      <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_knzzel05&playerId=kaltura_player_1439986974&cache_st=1439986974&width=400&height=333&flashvars[streamerType]=auto"></script>
     </div> 
   </body>
 </html>
