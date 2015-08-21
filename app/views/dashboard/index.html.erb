@@ -1,6 +1,13 @@
 <html lang="en" ng-app="DatvietApp" id="top">
   <head>
     <title>AngularUI Dashboard for Datviet</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="" rel="stylesheet" />
+
+    <!-- JS Files -->
     <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="/kaltura/ox.ajast.js"></script>
     <script type="text/javascript" src="/kaltura/webtoolkit.md5.js"></script>
@@ -9,7 +16,11 @@
     <script type="text/javascript" src="/kaltura/KalturaVO.js"></script>
     <script type="text/javascript" src="/kaltura/KalturaServices.js"></script>
     <script type="text/javascript" src="/kaltura/KalturaClient.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script type="text/javascript" src="/dashboard/dashboard_list.js"></script>
+    <script type="text/javascript" src="bower_components/ng-table/dist/ng-table.min.js"></script>
   </head>
   <body>
 
@@ -47,6 +58,30 @@
       </table>
     </div>
 
+
+    <div id='dashboard-list' ng-controller="dashboardListCtrl" class="container-fluid">
+      <div class="row-fluid dashborad-list">
+        <div>
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{selected.name}}</h5>
+                </div>
+                <div class="modal-body" ng-init="append_data()">
+                  <template src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_9fyuc4qh&playerId=kaltura_player_1439986332&cache_st=1439986332&width=400&height=333&flashvars[streamerType]=auto"></template>
+                </div>
+            </script>
+        </div>
+
+        <table ng-table class="table table-responsive table-striped table-bordered">
+          <tr ng-repeat="selected_asset in assets">
+            <td data-title="'Entry Id'" header-title="'Foo'"><a href="" ng-click="play_asset(selected_asset)">{{selected_asset.entry_id}}</a></td>
+            <td data-title="'Name'" header-title="'Bar'">{{selected_asset.name}}</td>
+            <td data-title="'Type'" header-title="'Bar'">{{selected_asset.type}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
     <div class='aligncenter headingfont margin25'>
       <label> List of Videos uploaded on Kaltura Server<label>
     </div>
@@ -62,7 +97,6 @@
       <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_6nc0394y&playerId=kaltura_player_1439986936&cache_st=1439986936&width=400&height=333&flashvars[streamerType]=auto"></script>
 
       <script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_knzzel05&playerId=kaltura_player_1439986974&cache_st=1439986974&width=400&height=333&flashvars[streamerType]=auto"></script>
-
-    </div>
+    </div> 
   </body>
 </html>
