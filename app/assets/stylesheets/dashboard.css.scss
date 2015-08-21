@@ -20,4 +20,20 @@
 
 .dashborad-list {
   margin-top: 2%;
+
+  .table td {
+    text-align: center;
+  }
+}
+
+.modal-content {
+  .modal-title {
+    text-align: center;
+  }
+  .modal-body {
+    #myEmbedTarget {
+      width:100%;
+      height:330px;
+    }
+  }
 }
