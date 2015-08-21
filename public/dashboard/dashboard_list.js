@@ -1,5 +1,5 @@
 var app = angular.module('DatvietApp', ['ui.bootstrap', 'ngTable']);
-  app.controller('dashboardListCtrl', function ($scope, $modal, $log) {
+  app.controller('dashboardListCtrl', function ($scope, $modal, $log, $http) {
     $scope.assets = [{entry_id: "0_xorqmjg0", type: 0, name: 'DemoImname.jpg'},
                     {entry_id: "0_sy3r5yud", type: 2, name: 'DemoVideo.flv'},
                     {entry_id: "0_9fyuc4qh", type: 2, name: 'Microsoft VOD'},
