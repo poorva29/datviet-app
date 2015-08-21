@@ -52,4 +52,8 @@ var app = angular.module('DatvietApp', ['ui.bootstrap', 'ngTable']);
         }
       });
     };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
   });
