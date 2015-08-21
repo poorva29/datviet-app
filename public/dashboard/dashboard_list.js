@@ -1,6 +1,6 @@
 var app = angular.module('DatvietApp', ['ui.bootstrap', 'ngTable']);
   app.controller('dashboardListCtrl', function ($scope, $modal, $log, $http) {
-    $scope.assets = [{entry_id: "0_xorqmjg0", type: 0, name: 'DemoImname.jpg'},
+    $scope.assets = [{entry_id: "0_knzzel05", type: 2, name: 'Kaltura Education Video Solutions'},
                     {entry_id: "0_sy3r5yud", type: 2, name: 'DemoVideo.flv'},
                     {entry_id: "0_9fyuc4qh", type: 2, name: 'Microsoft VOD'},
                     {entry_id: "0_6nc0394y", type: 2, name: 'Kaltura Video Solutions for Media Companies'},
@@ -36,9 +36,20 @@ var app = angular.module('DatvietApp', ['ui.bootstrap', 'ngTable']);
   });
 
   app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
-    $scope.selected = items;
+    $scope.selected = items.selected_asset;
 
     $scope.append_data = function() {
-      // $('.modal-body.ng-scope').append('<script src="https://cdnapisec.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382?autoembed=true&entry_id=0_9fyuc4qh&playerId=kaltura_player_1439986332&cache_st=1439986332&width=400&height=333&flashvars[streamerType]=auto"></script>')
+      kWidget.embed({
+        'targetId': 'myEmbedTarget',
+        'wid': '_1988382',
+        'uiconf_id' : '30743062',
+        'entry_id' : $scope.selected.entry_id,
+        'flashvars':{ // flashvars allows you to set runtime uiVar configuration overrides.
+          'autoPlay': false
+        },
+        'params':{ // params allows you to set flash embed params such as wmode, allowFullScreen etc
+          'wmode': 'transparent'
+        }
+      });
     };
   });
