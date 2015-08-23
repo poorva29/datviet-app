@@ -1,0 +1,2 @@
+module DisplayAssetsHelper
+end
