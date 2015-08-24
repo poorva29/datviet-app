@@ -41,6 +41,7 @@ var myApp = angular.module('DatvietApp', ['ui.bootstrap', 'ngTable', 'ngRoute', 
 
   myApp.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
     $scope.cancel = function () {
+      kWidget.destroy( 'myEmbedTarget' );
       $modalInstance.dismiss('cancel');
     };
 
