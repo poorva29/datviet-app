@@ -34,6 +34,10 @@ end
 
 gem 'rest_client'
 
+# Angularjs with rails
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

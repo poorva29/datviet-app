@@ -15,6 +15,10 @@ class DisplayAssetsController < ApplicationController
     pager.page_index = 1
 
     @list = @client.media_service.list(filter, pager);
+    respond_to do |format|
+      format.json { render :json => @list.objects.as_json }
+      format.html
+    end
   end
 
   # GET /display_assets/1
@@ -85,7 +89,7 @@ class DisplayAssetsController < ApplicationController
     administrator_secret = config_file['test']['administrator_secret']
     timeout = config_file['test']['timeout']
     config = Kaltura::KalturaConfiguration.new(@partner_id, service_url)
-    config.logger = Logger.new(STDOUT)
+    # config.logger = Logger.new(STDOUT)
     config.timeout = timeout
 
     @client = Kaltura::KalturaClient.new(config)

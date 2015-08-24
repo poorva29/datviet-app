@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>DatvietApp</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en" ng-app="DatvietApp" id="top">
+	<head>
+	  <title>DatvietApp</title>
 
-<%= yield %>
+	  <!-- CSS Files -->
+	  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	  <link type="text/css" rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" rel="stylesheet" />
+	  <link type="text/css" rel="stylesheet" href="" rel="stylesheet" />
 
-</body>
+	  <!-- JS Files -->
+	  <script src="http://cdnapi.kaltura.com/p/1988382/sp/198838200/embedIframeJs/uiconf_id/30743062/partner_id/1988382"></script>
+	  <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+	  <script type="text/javascript" src="/kaltura/ox.ajast.js"></script>
+	  <script type="text/javascript" src="/kaltura/webtoolkit.md5.js"></script>
+	  <script type="text/javascript" src="/kaltura/KalturaClientBase.js"></script>
+	  <script type="text/javascript" src="/kaltura/KalturaTypes.js"></script>
+	  <script type="text/javascript" src="/kaltura/KalturaVO.js"></script>
+	  <script type="text/javascript" src="/kaltura/KalturaServices.js"></script>
+	  <script type="text/javascript" src="/kaltura/KalturaClient.js"></script>
+	  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+	  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="bower_components/ng-table/dist/ng-table.min.js"></script>
+	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+	  <div class="container-fluid" ng-view>
+	    <%= yield %>
+	  </div>
+	</body>
 </html>
